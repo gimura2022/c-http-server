@@ -3,15 +3,20 @@ CFLAGS   = -Wall -std=c99 -g -O0
 LDFLAGS  = 
 CPPFLAGS = -I include
 
-SOURCES = src/main.c src/http.c src/gif.c
+SOURCES = src/http_server.c 
 OBJECTS = $(SOURCES:.c=.o)
 
+TARGET = http_server
+
 .PHONY: all
-all: main
+all: lib$(TARGET).a lib$(TARGET).so 
 
 .PHONY: clean
 clean:
-	rm -f $(OBJECTS) main
+	rm -f $(OBJECTS) lib$(TARGET).a lib$(TARGET).so
 
-main: $(OBJECTS)
-	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
+lib$(TARGET).so: $(OBJECTS)
+	$(CC) $(CFLAGS) -shared -o $@ $^ $(LDFLAGS)
+
+lib$(TARGET).a: $(OBJECTS)
+	ar rcs $@ $^

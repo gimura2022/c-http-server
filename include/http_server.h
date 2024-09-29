@@ -2,6 +2,7 @@
 #define _http_server_h
 
 #include <stdint.h>
+#include <stdbool.h>
 
 typedef enum {
 	HTTPRST_INFO_CONTINUE = 100,
@@ -36,12 +37,17 @@ typedef struct {
 	const char* content;
 } http_request_t;
 
-typedef http_responce_t (*http_responder_t)(http_request_t);
+typedef struct {
+	bool runned;	
+} http_server_context_t;
+
+typedef http_responce_t (*http_responder_t)(http_server_context_t*, http_request_t);
 
 typedef struct {
 	const char* path;
 	const http_responder_t responder;
 	const http_request_type_t request_type;
+	const bool use_regex;
 } http_path_responder_t;
 
 typedef struct {
@@ -50,6 +56,6 @@ typedef struct {
 
 http_server_data_t http_get_default_server_data(void);
 
-void http_start_server(http_server_data_t server_data, http_path_responder_t* responders);
+void http_start_server(http_server_data_t server_data, http_path_responder_t* responders, size_t responder_count); 
 
 #endif

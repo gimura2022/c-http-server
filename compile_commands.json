@@ -1,0 +1,20 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-Wall",
+      "-std=c99",
+      "-g",
+      "-O0",
+      "-I",
+      "include",
+      "-c",
+      "-o",
+      "src/http_server.o",
+      "src/http_server.c"
+    ],
+    "directory": "/home/gimura/c-http-server",
+    "file": "/home/gimura/c-http-server/src/http_server.c",
+    "output": "/home/gimura/c-http-server/src/http_server.o"
+  }
+]
