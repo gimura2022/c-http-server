@@ -2,6 +2,7 @@
 #define _http_server_h
 
 #include <stdint.h>
+#include <stddef.h>
 #include <stdbool.h>
 
 typedef enum {
